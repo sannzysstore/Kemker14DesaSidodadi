@@ -305,6 +305,15 @@
                             <span class="font-medium text-slate-700">Batas Administrasi Desa</span>
                         </label>
                         <label class="flex items-center space-x-2.5 cursor-pointer hover:bg-slate-50 p-1.5 rounded-lg transition">
+    <input type="checkbox" id="layerNetworkAnalysisToggle" checked class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+    <span class="font-medium text-slate-700">Hasil Analisis Network</span>
+</label>
+
+<label class="flex items-center space-x-2.5 cursor-pointer hover:bg-slate-50 p-1.5 rounded-lg transition">
+    <input type="checkbox" id="layerBangunanToggle" checked class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+    <span class="font-medium text-slate-700">Bangunan</span>
+</label>
+                        <label class="flex items-center space-x-2.5 cursor-pointer hover:bg-slate-50 p-1.5 rounded-lg transition">
                             <input type="checkbox" id="layerJalanToggle" checked class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
                             <span class="font-medium text-slate-700">Jaringan Jalan Desa</span>
                         </label>
@@ -1406,6 +1415,7 @@ let qgisRouteLayer = null;
 // -------------------------------------------------------------
 
 document.getElementById('layerBatasToggle').addEventListener('change', function() {
+    
 
     const iframe = document.getElementById('qgisWebGIS');
 
@@ -1428,6 +1438,29 @@ document.getElementById('layerBatasToggle').addEventListener('change', function(
         qgisMap.removeLayer(batasLayer);
     }
 
+});
+document.getElementById('layerNetworkAnalysisToggle').addEventListener('change', function () {
+    const qgisWindow = document.getElementById('qgisWebGIS').contentWindow;
+
+    if (qgisWindow.layer_HASIL_NETWORKANALISIS_3) {
+        if (this.checked) {
+            qgisWindow.layer_HASIL_NETWORKANALISIS_3.addTo(qgisWindow.map);
+        } else {
+            qgisWindow.map.removeLayer(qgisWindow.layer_HASIL_NETWORKANALISIS_3);
+        }
+    }
+});
+
+document.getElementById('layerBangunanToggle').addEventListener('change', function () {
+    const qgisWindow = document.getElementById('qgisWebGIS').contentWindow;
+
+    if (qgisWindow.layer_Bangunan_2) {
+        if (this.checked) {
+            qgisWindow.layer_Bangunan_2.addTo(qgisWindow.map);
+        } else {
+            qgisWindow.map.removeLayer(qgisWindow.layer_Bangunan_2);
+        }
+    }
 });
 
 // -------------------------------------------------------------
